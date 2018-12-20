@@ -1,0 +1,291 @@
+<!DOCTYPE html> 
+<html xmlns:fb="https://www.facebook.com/2008/fbml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <title>New JavaScript SDK & OAuth 2.0 based FBConnect Tutorial | Thinkdiff.net</title>
+        <!--
+            @author: Mahmud Ahsan (http://mahmud.thinkdiff.net)
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <style>
+        .panel > .list-group .list-group-item:first-child {
+    /*border-top: 1px solid rgb(204, 204, 204);*/
+}
+@media (max-width: 767px) {
+    .visible-xs {
+        display: inline-block !important;
+    }
+    .block {
+        display: block !important;
+        width: 100%;
+        height: 1px !important;
+    }
+}
+#back-to-bootsnipp {
+    position: fixed;
+    top: 10px; right: 10px;
+}
+
+
+
+
+
+.c-list {
+    padding: 0px;
+    min-height: 44px;
+}
+.title {
+    display: inline-block;
+    font-size: 1.7em;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+ul.c-controls {
+    list-style: none;
+    margin: 0px;
+    min-height: 44px;
+}
+
+ul.c-controls li {
+    margin-top: 8px;
+    float: left;
+}
+
+ul.c-controls li a {
+    font-size: 1.7em;
+    padding: 11px 10px 6px;   
+}
+ul.c-controls li a i {
+    min-width: 24px;
+    text-align: center;
+}
+
+ul.c-controls li a:hover {
+    background-color: rgba(51, 51, 51, 0.2);
+}
+
+.c-toggle {
+    font-size: 1.7em;
+}
+
+.name {
+    font-size: 1.7em;
+    font-weight: 700;
+}
+
+.c-info {
+    padding: 5px 10px;
+    font-size: 1.25em;
+}
+
+        </style>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+            var button;
+            var userInfo;
+            
+            window.fbAsyncInit = function() {
+                FB.init({ appId: '2021272528104107', //change the appId to your appId
+                   // FB.init({ appId: '601434903399369',
+                    status: true, 
+                    cookie: true,
+                    xfbml: true,
+                    oauth: true});
+
+               showLoader(true);
+               
+               function updateButton(response) {
+                    button       =   document.getElementById('fb-auth');
+                    userInfo     =   document.getElementById('user-info');
+                    
+                    if (response.authResponse) {
+                        //user is already logged in and connected
+                        FB.api('/me?fields=name,email,id', function(info) {
+                            login(response, info);
+                        });
+                        
+                        button.onclick = function() {
+                            FB.logout(function(response) {
+                                logout(response);
+                            });
+                        };
+                    } else {
+                        //user is not connected to your app or logged out
+                        button.innerHTML = 'Login';
+                        button.onclick = function() {
+                            showLoader(true);
+                            FB.login(function(response) {
+                                if (response.authResponse) {
+                                    FB.api('/me?fields=name,email,id', function(info) {
+                                        login(response, info);
+                                       // getuserfriend(response,info);
+                                    });	   
+                                } else {
+                                    //user cancelled login or did not grant authorization
+                                    showLoader(false);
+                                }
+                            }, {scope: 'email', return_scopes: true});  	
+                        }
+                    }
+                }
+                
+                // run once with current status and whenever the status changes
+                FB.getLoginStatus(updateButton);
+                FB.Event.subscribe('auth.statusChange', updateButton);	
+            };
+            (function() {
+                var e = document.createElement('script'); e.async = true;
+                e.src = document.location.protocol 
+                    + '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+            
+            
+            function login(response, info){
+                if (response.authResponse) {
+                    var accessToken                                 =   response.authResponse.accessToken;
+                    userInfo.innerHTML                             = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name 
+                                                                     + "<br /> Your Emailid: " + info.email + "<br /> Your id: " + info.id +  response.id +"   "+response.authResponse.userID+"<br /> Your accessToken: " + accessToken;
+                    button.innerHTML                               = 'Logout';
+                    showLoader(false);
+                    document.getElementById('other').style.display = "block";
+                    //getuserfriend(response,info);
+                }
+            }
+        
+            function logout(response){
+                userInfo.innerHTML                             =   "";
+                document.getElementById('debug').innerHTML     =   "";
+                document.getElementById('other').style.display =   "none";
+                showLoader(false);
+            }
+
+            function share(){
+                showLoader(true);
+                var share = {
+                    method: 'feed',
+                    //u: 'http://shubhamagarwal.co.in/',
+ name: 'DebugmodeEventPlans',
+ link: 'http://whennwemet.com/ShareonFB.html',
+ caption: 'hey how is my Application ? tell me dude',
+ description: 'hey how is my Application ?',
+ message: ''
+                };
+
+                FB.ui(share, function(response) { 
+                    showLoader(false);
+                    console.log(response); 
+                });
+            }
+
+            
+            function showLoader(status){
+                if (status)
+                    document.getElementById('loader').style.display = 'block';
+                else
+                    document.getElementById('loader').style.display = 'none';
+            }
+            
+            function sortMethod(a, b) {
+var x = a.name.toLowerCase();
+var y = b.name.toLowerCase();
+return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+
+
+
+function getuserfriend(response,info){
+    if (response.authResponse) {
+      //  alert("autho");
+                    var accessToken                                 =   response.authResponse.accessToken;
+                   // alert("https://graph.facebook.com/v2.3/" +info.id +"/friends?access_token=" +accessToken);
+                    $.ajax({
+    url: '"https://graph.facebook.com/v2.3/" +info.id +"/friends?access_token=" +accessToken',
+    type: 'GET',
+    //data: { name: name, username: username,emailid: emailid,password: password,phone: mobile} ,
+    beforeSend: function() {
+          
+       },
+    success: function (response) {
+        alert("success");
+    var result_holder = document.getElementById('result_friends');
+var friend_data = response.data.sort(sortMethod);
+///echo friend_data;
+var results = '';
+alert(friend_data[2].email);
+for (var i = 0; i < friend_data.length; i++) {
+results += '<div><img src="'+response.data[i].picture.data.url+'"/>' + friend_data[i].email+ friend_data[i].email +'</div>';
+}
+// and display them at our holder element
+result_holder.innerHTML = '<h2>Result list of your friends:</h2>' + results;
+    },
+    error: function (response) {
+        //$("#loader").show();
+        //alert(response);
+    }
+    }); 	
+                }
+    	
+    
+}
+            
+            // get friends
+function getfriend(){
+   
+FB.api('/me/taggable_friends?limit=888', function(response) {
+var result_holder = document.getElementById('result_friends');
+var friend_data = response.data.sort(sortMethod);
+///echo friend_data;
+var results = '';
+for (var i = 0; i < friend_data.length; i++) {
+/*results +='<a href="javascript:mateprofile('+i+');"><li class="list-group-item">'
+                        +'<div class="col-xs-12 col-sm-3">'
+                            +'<img src="'+response.data[i].picture.data.url+'" alt="Scott Stevens" class="img-responsive img-circle" width="80px"/>'
+                        +'</div>'
+                        +'<div class="col-xs-12 col-sm-9">'
+                            +'<span class="name">'+ friend_data[i].name+'</span><br/>'
+                            //+'<span class="name" >'+html.users[i].username+'</span><br/>'
+							+'<input type="hidden" id="'+i+'" value="'+ friend_data[i].accessToken+'">'
+                        +'</div> <div class="clearfix"></div>'
+                   +' </li></a>';*/
+results += '<div><img src="'+response.data[i].picture.data.url+'"/>' + friend_data[i].name+"       "+ friend_data[i].email+'</div>';
+}
+// and display them at our holder element
+result_holder.innerHTML = '<h2>Result list of your friends:</h2>' + results;
+});
+}      
+        </script>
+
+        
+        <button id="fb-auth">Login</button>
+        <div id="loader" style="display:none">
+            <img src="ajax-loader.gif" alt="loading" />
+        </div>
+        <br />
+        <div id="user-info"></div>
+        <br />
+        <div id="debug"></div>
+        
+        <div id="other" style="display:none">
+            
+            <a href="#" onclick="share(); return false;">Share With Your Friends</a> | <a href="#" onclick="getfriend(); return false;">Get Your Friends</a> |
+            
+            
+            <br />
+            <textarea id="status" cols="50" rows="5">Write your status here and click 'Status Set Using Legacy Api Call'</textarea>
+            <br />
+            <a href="#" onclick="setStatus(); return false;">Status Set Using Legacy Api Call</a>
+        </div>
+        <div id="result_friends"></div>
+    </body>
+</html>

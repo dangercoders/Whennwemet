@@ -1,0 +1,2 @@
+[24-Dec-2017 08:35:30 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/whennwemet/public_html/profile/changepassword.php:1) in /home/whennwemet/public_html/profile/changepassword.php on line 30
+[24-Dec-2017 08:35:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/whennwemet/public_html/profile/changepassword.php:1) in /home/whennwemet/public_html/profile/changepassword.php on line 46

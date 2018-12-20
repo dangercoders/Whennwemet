@@ -1,0 +1,1 @@
+[16-Oct-2017 17:44:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/whennwemet/public_html/profile/fbshare/index.php:6) in /home/whennwemet/public_html/profile/fbshare/index.php on line 9

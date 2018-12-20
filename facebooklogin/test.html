@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <!--  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+      <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+      <script src="js/bootstrap.min.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+   <link rel="stylesheet" href="css/sidebar.css">
+    <meta charset="utf-8" />
+    <title>Whennwemet</title>
+    <script src="scripts/jquery.js"></script>
+
+
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
+
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="js/uservalidation.js"></script>
+	<script type="text/javascript" src="js/logout.js"></script>
+    <style>
+    input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+.panel > .list-group .list-group-item:first-child {
+    /*border-top: 1px solid rgb(204, 204, 204);*/
+}
+@media (max-width: 767px) {
+    .visible-xs {
+        display: inline-block !important;
+    }
+    .block {
+        display: block !important;
+        width: 100%;
+        height: 1px !important;
+    }
+}
+#back-to-bootsnipp {
+    position: fixed;
+    top: 10px; right: 10px;
+}
+
+
+
+
+
+.c-list {
+    padding: 0px;
+    min-height: 44px;
+}
+.title {
+    display: inline-block;
+    font-size: 1.7em;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+ul.c-controls {
+    list-style: none;
+    margin: 0px;
+    min-height: 44px;
+}
+
+ul.c-controls li {
+    margin-top: 8px;
+    float: left;
+}
+
+ul.c-controls li a {
+    font-size: 1.7em;
+    padding: 11px 10px 6px;   
+}
+ul.c-controls li a i {
+    min-width: 24px;
+    text-align: center;
+}
+
+ul.c-controls li a:hover {
+    background-color: rgba(51, 51, 51, 0.2);
+}
+
+.c-toggle {
+    font-size: 1.7em;
+}
+
+.name {
+    font-size: 1.7em;
+    font-weight: 700;
+}
+
+.c-info {
+    padding: 5px 10px;
+    font-size: 1.25em;
+}
+
+
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+setTimeout(function (){
+  $('.button-collapse').sideNav({
+                                            menuWidth: 240, // Default is 240
+                                            edge: 'left', // Choose the horizontal origin
+                                            closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                                            draggable: false // Choose whether you can drag to open on touch screens
+                                        }
+                                        );
+},1000)
+
+    </script>
+
+</head>
+<body >
+    <!-- Side Navigation Menu-->
+
+    <div>
+        <ul id="slide-out" class="side-nav">
+            <li>
+                <div class="userView">
+                    <div class="background">
+
+                    </div>
+                    <div><img class="circle" src="" id="profilepic" name="profilepic"></div>
+                    <div><span class="white-text name"></span></div>
+                    <div><span class="white-text id"></span></div>
+                </div>
+            </li>
+            <li><a href="accountsetting.html">Setting</a></li>
+            <li><a href="index.html">Search</a></li>
+            <li><a href="message.html">Meassage</a></li>
+            <li><a href="fbconnect.html">Connect Facebook</a></li>
+            <li><a href="userprofile.html">Profile</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="waves-effect" onclick="logout();">Logout</a></li>
+        </ul>
+        <div class="top-bar">
+            <button data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></button>
+        </div>
+    </div>
+    <br><br>
+    
+	<div id="fb-root"></div>
+        <script type="text/javascript">
+            var button;
+            var userInfo;
+            
+            window.fbAsyncInit = function() {
+                FB.init({ appId: '601434903399369', //change the appId to your appId
+                    status: true, 
+                    cookie: true,
+                    xfbml: true,
+                    oauth: true});
+
+               //showLoader(true);
+               
+               function updateButton(response) {
+                    button       =   document.getElementById('fb-auth');
+                    userInfo     =   document.getElementById('user-info');
+                    
+                    if (response.authResponse) {
+                        //user is already logged in and connected
+                        FB.api('/me?fields=name,email,id', function(info) {
+                            login(response, info);
+                        });
+                        
+                        button.onclick = function() {
+                            FB.logout(function(response) {
+                                logout(response);
+                            });
+                        };
+                    } else {
+                        //user is not connected to your app or logged out
+                        button.innerHTML = 'Login';
+                        button.onclick = function() {
+                            showLoader(true);
+                            FB.login(function(response) {
+                                if (response.authResponse) {
+                                    FB.api('/me?fields=name,email,id', function(info) {
+                                        login(response, info);
+                                       // getuserfriend(response,info);
+                                    });	   
+                                } else {
+                                    //user cancelled login or did not grant authorization
+                                    showLoader(false);
+                                }
+                            }, {scope: 'email', return_scopes: true});  	
+                        }
+                    }
+                }
+                
+                // run once with current status and whenever the status changes
+                FB.getLoginStatus(updateButton);
+                FB.Event.subscribe('auth.statusChange', updateButton);	
+            };
+            (function() {
+                var e = document.createElement('script'); e.async = true;
+                e.src = document.location.protocol 
+                    + '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+            
+            
+            function login(response, info){
+                if (response.authResponse) {
+                    var accessToken                                 =   response.authResponse.accessToken;
+                    alert(response.authResponse.accessToken+"           "+response.authResponse.id);
+					if(info.email!=localStorage.getItem('uemailid')){
+					FB.logout(function(response) {
+                                logout(response);
+                            });
+					swal("WhennWeMet", "Please Login With Registered Account", {
+					buttons: false,
+					timer: 2000,
+					icon: "success",
+					});
+					var delayInMilliseconds = 2000; //1 second
+					setTimeout(function() {
+					//window.location.replace('sharepost.html'); 
+					}, delayInMilliseconds);
+					}
+                    document.getElementById('fb-auth').style.display = "none";
+                    //getuserfriend(response,info);
+					getfriend();
+                }
+            }
+        
+            function logout(response){
+                //userInfo.innerHTML                             =   "";
+                //document.getElementById('debug').innerHTML     =   "";
+                document.getElementById('other').style.display =   "none";
+                //showLoader(false);
+            }
+
+            function share(){
+                showLoader(true);
+                var share = {
+                    method: 'feed',
+                    //u: 'http://shubhamagarwal.co.in/',
+ name: 'DebugmodeEventPlans',
+ link: 'http://whennwemet.com/ShareonFB.html',
+ caption: 'hey how is my Application ? tell me dude',
+ description: 'hey how is my Application ?',
+ message: ''
+                };
+
+                FB.ui(share, function(response) { 
+                    showLoader(false);
+                    console.log(response); 
+                });
+            }
+
+            
+            function showLoader(status){
+                if (status)
+                    document.getElementById('loader').style.display = 'block';
+                else
+                    document.getElementById('loader').style.display = 'none';
+            }
+            
+            function sortMethod(a, b) {
+var x = a.name.toLowerCase();
+var y = b.name.toLowerCase();
+return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+
+
+
+function getuserfriend(response,info){
+    if (response.authResponse) {
+      //  alert("autho");
+                    var accessToken                                 =   response.authResponse.accessToken;
+                   // alert("https://graph.facebook.com/v2.3/" +info.id +"/friends?access_token=" +accessToken);
+                    $.ajax({
+    url: '"https://graph.facebook.com/v2.3/" +info.id +"/friends?access_token=" +accessToken',
+    type: 'GET',
+    //data: { name: name, username: username,emailid: emailid,password: password,phone: mobile} ,
+    beforeSend: function() {
+          
+       },
+    success: function (response) {
+        alert("success");
+    var result_holder = document.getElementById('result_friends');
+var friend_data = response.data.sort(sortMethod);
+///echo friend_data;
+var results = '';
+for (var i = 0; i < friend_data.length; i++) {
+results += '<div><img src="'+response.data[i].picture.data.url+'"/>' + friend_data[i].name + '</div>';
+}
+// and display them at our holder element
+result_holder.innerHTML = '<h2>Result list of your friends:</h2>' + results;
+    },
+    error: function (response) {
+        //$("#loader").show();
+        //alert(response);
+    }
+    }); 	
+                }
+    	
+    
+}
+            
+            // get friends
+function getfriend(){
+   
+FB.api('/me/taggable_friends?limit=888', function(response) {
+var result_holder = document.getElementById('result_friends');
+var friend_data = response.data.sort(sortMethod);
+///echo friend_data;
+var results = '';
+for (var i = 0; i < friend_data.length; i++) {
+results += '<div><img src="'+response.data[i].picture.data.url+'"/>' + friend_data[i].name + '</div>';
+}
+// and display them at our holder element
+result_holder.innerHTML = '<h2>Result list of your friends:</h2>' + results;
+});
+}      
+        </script>
+
+        
+        <button id="fb-auth">Login</button>
+        <div id="loader" style="display:none">
+            <img src="ajax-loader.gif" alt="loading" />
+        </div>
+		<div id="result_friends"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,2 @@
+[05-Dec-2017 11:13:56 UTC] PHP Fatal error:  Call to undefined function addHeader() in /home/whennwemet/public_html/profile/test/fileupload.php on line 2
+[06-Dec-2017 16:48:52 UTC] PHP Fatal error:  Call to undefined function addHeader() in /home/whennwemet/public_html/profile/test/fileupload.php on line 2

@@ -1,0 +1,2 @@
+[13-Oct-2017 03:51:31 UTC] PHP Notice:  Undefined index: namePerson/first in /home/whennwemet/public_html/yahoologin/login-yahoo.php on line 24
+[13-Oct-2017 03:51:31 UTC] PHP Notice:  Undefined index: namePerson/last in /home/whennwemet/public_html/yahoologin/login-yahoo.php on line 25

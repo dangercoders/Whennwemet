@@ -1,0 +1,65 @@
+<!--<html>
+<head>
+ <meta property="og:title" content="My Shared Article Title" />
+  <meta property="og:description" content="Description of shared article" />
+  <meta property="og:url" content="http://example.com/my_article.html" />
+  <meta property="og:image" content="http://whennwemet.com/img/logo.jpg" />
+<script type="text/javascript" src="//platform.linkedin.com/in.js">
+  api_key: 81lnk7994soc0b
+  authorize: true
+  onLoad: onLinkedInLoad
+</script>
+<script type="text/javascript">
+      // Setup an event listener to make an API call once auth is complete
+    function onLinkedInLoad() {
+      IN.Event.on(IN, "auth", shareContent);
+    }
+    // Handle the successful return from the API call
+    function onSuccess(data) {
+      console.log(data);
+    }
+      // Handle an error response from the API call
+    function onError(error) {
+      console.log(error);
+    }
+
+   // Use the API call wrapper to share content on LinkedIn
+    function shareContent() {
+            // Build the JSON payload containing the content to be shared
+      var payload = {
+            Content-Type: application/json
+            x-li-format: json
+            "comment": "Check out developer.linkedin.com!",
+            "content": {
+                "title": "LinkedIn Developers Resources",
+                "description": "Leverage LinkedIn's APIs to maximize engagement",
+                "submitted-url": "https://developer.linkedin.com",  
+                "submitted-image-url": "http://whennwemet.com/img/logo.jpg"
+            },
+           "visibility": {
+               "code": "anyone"
+           }  
+      };
+
+      IN.API.Raw("/people/~/shares?format=json")
+     .method("POST")
+     .body(JSON.stringify(payload))
+     .result(onSuccess)
+     .error(onError);
+  }
+
+</script>
+</head>
+<body>
+
+    <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+    <script type="IN/Share"></script>
+</body>
+</html> -->
+<a class="w-inline-block social-share-btn lnk" href="http://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' + encodeURIComponent(document.title)); return false;"></a>
+<script>
+var url = "http://google.com";
+var title = "Replace this with a title.";
+var text = "Replace this with your share copy.";
+window.open('http://www.linkedin.com/shareArticle?mini=true&url='+encodeURIComponent(url), '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+</script>

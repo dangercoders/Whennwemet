@@ -1,0 +1,171 @@
+$(document).ready(function (e) {
+$("#accountSetForm").on('submit',(function(e) {
+e.preventDefault();
+//$("#message").empty();
+//$('#loading').show();
+$.ajax({
+url: "http://www.whennwemet.com/profile/test/fileupload.php", // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+//datatype:jsonp,
+//crossDomain: true,
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+	data = JSON.parse(data);
+	if(data.error!="true"){
+		swal("WhennWeMet", data.message, {
+        buttons: false,
+		timer: 2000,
+		icon: "success",
+      });
+	  var delayInMilliseconds = 2000; //1 second
+	  setTimeout(function() {
+	  window.location.replace('search.php'); 
+	}, delayInMilliseconds);
+	
+	}else{
+		swal("WhennWeMet", data.message, {
+        buttons: false,
+		timer: 2000,
+		icon: "success",
+      });
+	  var delayInMilliseconds = 2000; //1 second
+	  setTimeout(function() {
+	  window.location.replace('accountsetting.php'); 
+	}, delayInMilliseconds);
+		
+	}
+//$("#message").html(data);
+},
+
+
+error: function (jqXHR, textStatus, errorThrown) {
+    var msg = '';
+        if (jqXHR.status === 0) {
+            //msg = 'Not connect.\n Verify Network.';
+            return;
+        } else if (jqXHR.status == 404) {
+            msg = 'Requested page not found. [404]';
+        } else if (jqXHR.status == 500) {
+            msg = 'Internal Server Error [500].';
+        } else if (exception === 'parsererror') {
+            msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
+            msg = 'Time out error.';
+        } else if (exception === 'abort') {
+            msg = 'Ajax request aborted.';
+        } else {
+            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+        }
+        swal("WhennWeMet", msg, {
+        buttons: false,
+		timer: 2000,
+		icon: "error",
+      });
+	  var delayInMilliseconds = 2000; //1 second
+	  setTimeout(function() {
+	  window.location.replace('accountsetting.php'); 
+	}, delayInMilliseconds);
+    }
+});
+//esperar(1500);
+return false;
+}));
+
+$("#accountSetForm1").on('submit',(function(e) {
+e.preventDefault();
+//$("#message").empty();
+//$('#loading').show();
+$.ajax({
+url: "http://www.whennwemet.com/profile/test/changepassword.php", // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+crossDomain: true,
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+	data = JSON.parse(data);
+	if(data.error!="true"){
+		swal("WhennWeMet", data.message, {
+        buttons: false,
+		timer: 2000,
+		icon: "success",
+      });
+	  var delayInMilliseconds = 2000; //1 second
+	  setTimeout(function() {
+	  window.location.replace('search.php'); 
+	}, delayInMilliseconds);
+	
+	}else{
+		swal("WhennWeMet", data.message, {
+        buttons: false,
+		timer: 2000,
+		icon: "success",
+      });
+	  var delayInMilliseconds = 2000; //1 second
+	  setTimeout(function() {
+	  window.location.replace('accountsetting.php'); 
+	}, delayInMilliseconds);
+		
+	}
+//$("#message").html(data);
+}
+});
+swal("WhennWeMet", data.message, {
+        buttons: false,
+		timer: 2000,
+		icon: "success",
+      });
+	  var delayInMilliseconds = 2000; //1 second
+	  setTimeout(function() {
+	  window.location.replace('search.php'); 
+	}, delayInMilliseconds);
+return false;
+}));
+
+
+// Function to preview image after validation
+$(function() {
+$("#file").change(function() {
+$("#message").empty(); // To remove the previous error message
+var file = this.files[0];
+var imagefile = file.type;
+var match= ["image/jpeg","image/png","image/jpg"];
+if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
+{
+//$('#preview').attr('src','noimage.png');
+$("#message").html("<p id='error'>Please Select A valid Image File</p><span id='error_message'>Only jpeg, jpg and png Images type allowed</span>");
+return false;
+}
+else
+{
+var reader = new FileReader();
+reader.onload = imageIsLoaded;
+reader.readAsDataURL(this.files[0]);
+}
+});
+});
+function imageIsLoaded(e) {
+$("#file").css("color","green");
+//$('#image_preview').css("display", "block");
+//document.querySelector('#preview').style.backgroundImage="url(e.target.result)";
+$('#previewing').attr('src', e.target.result);
+$('#previewing').attr('width', '120px');
+$('#previewing').attr('height', '120px');
+};
+
+function esperar(millis) 
+{
+var date = new Date();
+var curDate = null;
+
+do { curDate = new Date(); } 
+while(curDate-date < millis);
+} 
+});
+
